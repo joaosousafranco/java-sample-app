@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  postgres-container:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: java-sample-app
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+
+  springboot-app:
+    build: .
+    depends_on:
+      - postgres-container
+    ports:
+      - "8080:8080"
